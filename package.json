@@ -5,7 +5,7 @@
   "author": "Michael Ilett <michael.james.ilett@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "rm -rf dist; webpack --mode production;",
+    "build": "rm -rf docs; webpack --mode production;",
     "start": "webpack-dev-server --mode development --open"
   },
   "devDependencies": {

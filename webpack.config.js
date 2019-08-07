@@ -1,6 +1,7 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').default
 const isDevelopment = process.argv.mode === 'development';
 
 const config = {
@@ -69,7 +70,8 @@ const config = {
       minify: {
         collapseWhitespace: true
       }
-    })
+    }),
+    new HTMLInlineCSSWebpackPlugin()
   ]
 }
 

@@ -2333,6 +2333,11 @@ html-entities@^1.2.1:
   resolved "https://registry.yarnpkg.com/html-entities/-/html-entities-1.2.1.tgz#0df29351f0721163515dfb9e5543e5f6eed5162f"
   integrity sha1-DfKTUfByEWNRXfueVUPl9u7VFi8=
 
+html-inline-css-webpack-plugin@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/html-inline-css-webpack-plugin/-/html-inline-css-webpack-plugin-1.6.0.tgz#a0f7281678d37bacd5c5e14a6d534619a5d4898d"
+  integrity sha512-bl9nCY2k9FcPwJojFMDP4Iuf83NeZey8UznTRP7w7LIiXV5srzjyQXaprAn60m+ab7ptg+ntAQN0acLF0f5KfQ==
+
 html-minifier@^3.2.3:
   version "3.5.21"
   resolved "https://registry.yarnpkg.com/html-minifier/-/html-minifier-3.5.21.tgz#d0040e054730e354db008463593194015212d20c"

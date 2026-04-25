@@ -1,82 +1,66 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').default
-const isDevelopment = process.argv.mode === 'development';
+
+const isDevelopment = process.env.NODE_ENV === 'development'
 
 const config = {
   entry: {
-    "main": "./src/scss/main.scss",
+    main: './src/scss/main.scss',
   },
   devServer: {
-    openPage: 'index.html',
     port: 9001,
+    open: true,
+    static: {
+      directory: path.join(__dirname, 'src'),
+    },
   },
   output: {
     path: path.resolve(__dirname, 'docs'),
-    filename: "[name].js"
+    filename: '[name].js',
+    clean: true,
   },
   module: {
     rules: [
       {
         test: /\.js(x)?$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
+        use: { loader: 'babel-loader' },
       },
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader
-          },
-          {
-            loader: 'css-loader'
-          },
-          {
-            loader: 'postcss-loader'
-          },
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
           {
             loader: 'sass-loader',
-            options: {
-              implementation: require('sass')
-            }
-          }
-        ]
+            options: { api: 'modern' },
+          },
+        ],
       },
       {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-                name: '[name].[ext]',
-                outputPath: 'fonts/'
-            }
-          }
-        ]
-      }
-    ]
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name][ext]',
+        },
+      },
+    ],
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: '[name].css'
-    }),
+    new MiniCssExtractPlugin({ filename: '[name].css' }),
     new HtmlWebpackPlugin({
       template: './src/index.html',
-      inject: false,
+      inject: 'body',
       filename: 'index.html',
-      minify: {
-        collapseWhitespace: true
-      }
+      minify: { collapseWhitespace: true },
     }),
-    new HTMLInlineCSSWebpackPlugin()
-  ]
+  ],
 }
 
-if(isDevelopment){
- config.devtool = 'inline-source-map';
+if (isDevelopment) {
+  config.devtool = 'inline-source-map'
 }
 
 module.exports = config
